@@ -112,7 +112,7 @@ var Engine = (function(global) {
          * and, using the rowImages array, draw the correct image for that
          * portion of the "grid"
          */
-        ctx.drawImage(Resources.get('images/B.png'),0,0);
+        ctx.drawImage(Resources.get('images/background.png'),0,0);
 
         renderEntities();
     }
@@ -133,10 +133,8 @@ var Engine = (function(global) {
 
         treeDisk.render();
 
-        // testSlot.render();
-
         allSlots.forEach(function(slot) {
-            slot.render();
+           slot.render();
         });
 
         // allEnemies.forEach(function(enemy) {
@@ -159,25 +157,8 @@ var Engine = (function(global) {
      * all of these images are properly loaded our game will start.
      */
     var imagesToLoad = [
-        'images/B.png',
-        // 'images/stone-block.png',
-        // 'images/water-block.png',
-        // 'images/grass-block.png',
-        // 'images/enemy-bug.png',
-        // 'images/char-boy.png',
-        // 'images/blank.png'
+        'images/background.png',
         ];
-
-    // function loadFrames(resourceList, imageString, imageNum, needZero) {
-    //     for (var i = 1; i < imageNum + 1; i++) {
-    //         var newImage = imageString;
-    //         if (needZero && i < 10) {
-    //             newImage = newImage + 0;
-    //         }
-    //         newImage = newImage + i + '.png';
-    //         resourceList.push(newImage);
-    //     }
-    // }
 
     function loadFramesDisk(resourceList, imageString, imageNum, needZero) {
         for (var i = 0; i < imageNum + 1; i++) {
@@ -190,24 +171,11 @@ var Engine = (function(global) {
         }
     }
 
-    // loadFrames(imagesToLoad, 'images/dragon-animation-', 4, false);
-    // loadFrames(imagesToLoad, 'images/water-animation/water-', 30, true);
-    // loadFrames(imagesToLoad, 'images/char-boy-d', 4, false);
-    loadFramesDisk(imagesToLoad, 'images/MD', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/KD', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/SD', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/TD', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/B', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/KBL', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/KBR', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/KT', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/SBL', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/SBR', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/ST', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/TBL', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/TBR', 5, false);
-    loadFramesDisk(imagesToLoad, 'images/TT', 5, false);
+    var imagePrefix = ['md', 'kd', 'sd', 'td', 'blank', 'kbl', 'kbr', 'kt', 'sbl', 'sbr', 'st', 'tbl', 'tbr', 'tt'];
 
+    for(var i = 0; i < imagePrefix.length; i++) {
+        loadFramesDisk(imagesToLoad, 'images/' + imagePrefix[i], 5, false);
+    }
 
     Resources.load(imagesToLoad);
     Resources.onReady(init);    
