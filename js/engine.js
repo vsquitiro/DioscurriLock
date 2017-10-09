@@ -125,17 +125,31 @@ var Engine = (function(global) {
         /* Loop through all of the objects within the allEnemies array and call
          * the render function you have defined.
          */
-        masterDisk.render();
+        if (player.win) {
+            player.render();
 
-        kingDisk.render();
+        } else {
+            if(masterDisk.halfway) {
+                kingDisk.render();
+                
+                snakeDisk.render();
+                
+                treeDisk.render();
+                
+                masterDisk.render();
+            } else {
+                masterDisk.render();
 
-        snakeDisk.render();
+                kingDisk.render();
 
-        treeDisk.render();
+                snakeDisk.render();
 
-        allSlots.forEach(function(slot) {
-           slot.render();
-        });
+                treeDisk.render();
+            }
+            allSlots.forEach(function(slot) {
+                slot.render();
+            });
+        };
 
         // allEnemies.forEach(function(enemy) {
         //     enemy.render();
@@ -176,6 +190,8 @@ var Engine = (function(global) {
     for(var i = 0; i < imagePrefix.length; i++) {
         loadFramesDisk(imagesToLoad, 'images/' + imagePrefix[i], 5, false);
     }
+    
+    loadFramesDisk(imagesToLoad, 'images/victory', 3, false);
 
     Resources.load(imagesToLoad);
     Resources.onReady(init);    
